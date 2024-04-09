@@ -113,7 +113,7 @@ public class OrderDomainService {
         // 2、redis库存incr回去对应数量
         String orderId = commandPay.getOrderId();
         Order order = orderRepository.getOrder(orderId);
-        redisTemplate.opsForValue().increment("product:" + orderId, ((-1) * order.getAmount()));
+        redisTemplate.opsForValue().increment("product:" + orderId, order.getAmount());
     }
 
 }
