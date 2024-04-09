@@ -1,7 +1,9 @@
 package com.hixtrip.sample.entry;
 
+import com.hixtrip.sample.app.api.OrderService;
 import com.hixtrip.sample.client.order.dto.CommandOderCreateDTO;
 import com.hixtrip.sample.client.order.dto.CommandPayDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrderController {
 
+    @Autowired
+    private OrderService orderService;
 
     /**
      * todo 这是你要实现的接口
@@ -23,7 +27,8 @@ public class OrderController {
     public String order(@RequestBody CommandOderCreateDTO commandOderCreateDTO) {
         //登录信息可以在这里模拟
         var userId = "";
-        return "";
+        commandOderCreateDTO.setUserId(userId);
+        return orderService.order(commandOderCreateDTO);
     }
 
     /**
@@ -34,8 +39,8 @@ public class OrderController {
      * @return 请修改出参对象
      */
     @PostMapping(path = "/command/order/pay/callback")
-    public String payCallback(@RequestBody CommandPayDTO commandPayDTO) {
-        return "";
+    public void payCallback(@RequestBody CommandPayDTO commandPayDTO) {
+        orderService.payCallback(commandPayDTO);
     }
 
 }
