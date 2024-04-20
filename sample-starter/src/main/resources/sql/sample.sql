@@ -14,8 +14,6 @@ CREATE TABLE IF NOT EXISTS `order` (
     `update_time` datetime  NULL COMMENT '修改时间',
 
     PRIMARY KEY (`id`),
-    KEY `idx_user_id_pay_status` (`user_id`, `pay_status`) COMMENT '买家查询我的订单组合索引',
-    KEY `idx_seller_query` (`pay_status`, `pay_time`) COMMENT '卖家查询我的订单组合索引'
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='订单表';
 
 create index i_user_order on order
